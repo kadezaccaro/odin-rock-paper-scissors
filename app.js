@@ -7,10 +7,11 @@
 // * if computer wins, cpu score is incremented
 // winner is displayed
 
+const userScorecard = document.querySelector(".user-scorecard");
+const cpuScorecard = document.querySelector(".cpu-scorecard");
 const userScore = document.querySelector(".user-score");
 const cpuScore = document.querySelector(".cpu-score");
 const btns = document.querySelectorAll(".choice");
-const winIndicator = document.querySelector(".win-indicator");
 
 let playerChoice;
 let computerChoice;
@@ -34,34 +35,54 @@ function decideOutcome() {
     case "rockscissors":
     case "paperrock":
     case "scissorspaper":
-      win();
+      userScore.textContent++;
+      announceWinner("user");
       break;
     case "rockpaper":
     case "paperscissors":
     case "scissorsrock":
-      lose();
+      cpuScore.textContent++;
+      announceWinner("cpu");
       break;
     case "rockrock":
     case "paperpaper":
     case "scissorsscissors":
-      tie();
+      announceWinner("tie");
       break;
   }
 }
 
-function win() {
-  userScore.textContent++;
-  // TODO: notify win on user
-  console.log("You win!");
-}
+function announceWinner(winner) {
+  // create new HTML element everytime theres a win
+  const winIndicator = document.createElement("span");
+  winIndicator.classList.add("win-indicator");
+  // animate win indicator
+  winIndicator.classList.add("animate");
+  // clone
+  const clone = winIndicator.cloneNode(true);
 
-function lose() {
-  cpuScore.textContent++;
-  // TODO: notify win on CPU
-  console.log("You lose!");
-}
+  // if win, append indicator to user scoreboard
+  // if lose, append indicator to cpu scoreboard
+  // if tie, change the text to "Tie!" and append to both
 
-function tie() {
-  // TODO: notify tie on both
-  console.log("It's a tie!");
+  if (winner === "user") {
+    userScorecard.appendChild(winIndicator);
+    winIndicator.innerText = "You Win!";
+  } else if (winner === "cpu") {
+    cpuScorecard.appendChild(winIndicator);
+    winIndicator.innerText = "CPU Wins!";
+  } else if (winner === "tie") {
+    userScorecard.appendChild(winIndicator);
+    cpuScorecard.appendChild(clone);
+    winIndicator.innerText = "Tie!";
+    clone.innerText = "Tie!";
+  }
+
+  // delete elements after animation finishes
+  winIndicator.addEventListener("animationend", () => {
+    winIndicator.remove();
+  });
+  clone.addEventListener("animationend", () => {
+    clone.remove();
+  });
 }

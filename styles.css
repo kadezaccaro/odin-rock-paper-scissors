@@ -31,7 +31,8 @@ button {
   gap: 8px;
 }
 
-.scorecard {
+.user-scorecard,
+.cpu-scorecard {
   text-align: center;
   width: 100%;
   border: 2px solid greenyellow;
@@ -48,8 +49,25 @@ button {
 }
 
 .win-indicator {
+  visibility: hidden;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%);
+  font-size: 24px;
+}
+
+.animate {
+  visibility: visible;
+  animation: floatFade 2s ease-out forwards;
+}
+
+@keyframes floatFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    top: -160px;
+  }
 }
