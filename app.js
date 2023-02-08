@@ -1,5 +1,5 @@
 // * user clicks on a button to make a selection
-// * that value is stored in a variable called playerChoice
+// * that value is stored in a variable called userChoice
 // * get randomized computer choice
 // * store in a variable called computerChoice
 // * compare the choices and decide the outcome
@@ -12,14 +12,17 @@ const cpuScorecard = document.querySelector(".cpu-scorecard");
 const userScore = document.querySelector(".user-score");
 const cpuScore = document.querySelector(".cpu-score");
 const btns = document.querySelectorAll(".choice");
+const userSelectionIcon = document.querySelector(".user-selection-icon");
+const cpuSelectionIcon = document.querySelector(".cpu-selection-icon");
 
-let playerChoice;
+let userChoice;
 let computerChoice;
 
 btns.forEach((btn) => {
   btn.addEventListener("click", () => {
-    playerChoice = btn.textContent;
+    userChoice = btn.textContent;
     computerChoice = getComputerChoice();
+    moveSelectionIcons();
     decideOutcome();
   });
 });
@@ -30,8 +33,34 @@ function getComputerChoice() {
   return choices[randomNum];
 }
 
+function moveSelectionIcons() {
+  const halfWidthOfBtn = "97.3px";
+  switch (userChoice) {
+    case "rock":
+      userSelectionIcon.style.left = `${halfWidthOfBtn}`;
+      break;
+    case "paper":
+      userSelectionIcon.style.left = "50%";
+      break;
+    case "scissors":
+      userSelectionIcon.style.left = `calc(100% - ${halfWidthOfBtn})`;
+      break;
+  }
+  switch (computerChoice) {
+    case "rock":
+      cpuSelectionIcon.style.left = `${halfWidthOfBtn}`;
+      break;
+    case "paper":
+      cpuSelectionIcon.style.left = "50%";
+      break;
+    case "scissors":
+      cpuSelectionIcon.style.left = `calc(100% - ${halfWidthOfBtn})`;
+      break;
+  }
+}
+
 function decideOutcome() {
-  switch (playerChoice + computerChoice) {
+  switch (userChoice + computerChoice) {
     case "rockscissors":
     case "paperrock":
     case "scissorspaper":
@@ -54,37 +83,37 @@ function decideOutcome() {
 
 function announceWinner(winner) {
   // create new HTML element everytime theres a win
-  const winIndicator = document.createElement("span");
-  winIndicator.classList.add("win-indicator");
-  // animate win indicator
-  winIndicator.classList.add("animate");
+  const announcement = document.createElement("span");
+  announcement.classList.add("announcement");
+  // animate announcement
+  announcement.classList.add("animate");
   // clone
-  const clone = winIndicator.cloneNode(true);
+  const clone = announcement.cloneNode(true);
 
   // if win, append indicator to user scoreboard
   // if lose, append indicator to cpu scoreboard
   // if tie, change the text to "Tie!" and append to both
 
   if (winner === "user") {
-    userScorecard.appendChild(winIndicator);
-    winIndicator.innerText = "You Win!";
-    winIndicator.style.color = "greenyellow";
+    userScorecard.appendChild(announcement);
+    announcement.innerText = "You Win!";
+    announcement.style.color = "greenyellow";
   } else if (winner === "cpu") {
-    cpuScorecard.appendChild(winIndicator);
-    winIndicator.innerText = "CPU Wins!";
-    winIndicator.style.color = "red";
+    cpuScorecard.appendChild(announcement);
+    announcement.innerText = "CPU Wins!";
+    announcement.style.color = "red";
   } else if (winner === "tie") {
-    userScorecard.appendChild(winIndicator);
+    userScorecard.appendChild(announcement);
     cpuScorecard.appendChild(clone);
-    winIndicator.innerText = "Tie!";
+    announcement.innerText = "Tie!";
     clone.innerText = "Tie!";
-    winIndicator.style.color = "gray";
+    announcement.style.color = "gray";
     clone.style.color = "gray";
   }
 
   // delete elements after animation finishes
-  winIndicator.addEventListener("animationend", () => {
-    winIndicator.remove();
+  announcement.addEventListener("animationend", () => {
+    announcement.remove();
   });
   clone.addEventListener("animationend", () => {
     clone.remove();

@@ -19,12 +19,15 @@ main {
 
 button {
   cursor: pointer;
-  background-color: greenyellow;
+  background: none;
   border: none;
   width: 100%;
   padding: 16px 24px;
   border-radius: 8px;
   font-size: 24px;
+  text-transform: capitalize;
+  border: 2px solid white;
+  color: white;
 }
 
 .scoreboard {
@@ -75,7 +78,7 @@ button {
   gap: 8px;
 }
 
-.win-indicator {
+.announcement {
   visibility: hidden;
   position: absolute;
   top: 0;
@@ -100,4 +103,25 @@ button {
     top: -200px;
     font-size: 32px;
   }
+}
+
+.selection-icons {
+  position: relative;
+}
+
+.user-selection-icon,
+.cpu-selection-icon {
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: greenyellow;
+  transition: 0.3s;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.cpu-selection-icon {
+  top: 16px;
+  background-color: red;
 }
