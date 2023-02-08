@@ -5,7 +5,7 @@
 // * compare the choices and decide the outcome
 // * if user wins, user score is incremented
 // * if computer wins, cpu score is incremented
-// winner is displayed
+// * winner is displayed
 
 const userScorecard = document.querySelector(".user-scorecard");
 const cpuScorecard = document.querySelector(".cpu-scorecard");
@@ -68,14 +68,18 @@ function announceWinner(winner) {
   if (winner === "user") {
     userScorecard.appendChild(winIndicator);
     winIndicator.innerText = "You Win!";
+    winIndicator.style.color = "greenyellow";
   } else if (winner === "cpu") {
     cpuScorecard.appendChild(winIndicator);
     winIndicator.innerText = "CPU Wins!";
+    winIndicator.style.color = "red";
   } else if (winner === "tie") {
     userScorecard.appendChild(winIndicator);
     cpuScorecard.appendChild(clone);
     winIndicator.innerText = "Tie!";
     clone.innerText = "Tie!";
+    winIndicator.style.color = "gray";
+    clone.style.color = "gray";
   }
 
   // delete elements after animation finishes
