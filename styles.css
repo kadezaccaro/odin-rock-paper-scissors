@@ -1,3 +1,5 @@
+/* || GENERAL */
+
 * {
   margin: 0;
   padding: 0;
@@ -17,18 +19,7 @@ main {
   gap: 8px;
 }
 
-button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  width: 100%;
-  padding: 16px 24px;
-  border-radius: 8px;
-  font-size: 24px;
-  text-transform: capitalize;
-  border: 2px solid white;
-  color: white;
-}
+/* || SCOREBOARD */
 
 .scoreboard {
   display: flex;
@@ -71,12 +62,7 @@ button {
   color: red;
 }
 
-.choices {
-  width: 600px;
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-}
+/* || ANNOUNCEMENT */
 
 .announcement {
   visibility: hidden;
@@ -104,6 +90,30 @@ button {
     font-size: 32px;
   }
 }
+
+/* || CHOICES */
+
+.choices {
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 24px;
+  text-transform: capitalize;
+  border: 2px solid white;
+  color: white;
+}
+
+/* || SELECTION ICONS */
 
 .selection-icons {
   position: relative;

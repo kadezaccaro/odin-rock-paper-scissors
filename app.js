@@ -1,12 +1,3 @@
-// * user clicks on a button to make a selection
-// * that value is stored in a variable called userChoice
-// * get randomized computer choice
-// * store in a variable called computerChoice
-// * compare the choices and decide the outcome
-// * if user wins, user score is incremented
-// * if computer wins, cpu score is incremented
-// * winner is displayed
-
 const userScorecard = document.querySelector(".user-scorecard");
 const cpuScorecard = document.querySelector(".cpu-scorecard");
 const userScore = document.querySelector(".user-score");
@@ -82,17 +73,9 @@ function decideOutcome() {
 }
 
 function announceWinner(winner) {
-  // create new HTML element everytime theres a win
   const announcement = document.createElement("span");
-  announcement.classList.add("announcement");
-  // animate announcement
-  announcement.classList.add("animate");
-  // clone
+  announcement.classList.add("announcement", "animate");
   const clone = announcement.cloneNode(true);
-
-  // if win, append indicator to user scoreboard
-  // if lose, append indicator to cpu scoreboard
-  // if tie, change the text to "Tie!" and append to both
 
   if (winner === "user") {
     userScorecard.appendChild(announcement);
@@ -111,7 +94,6 @@ function announceWinner(winner) {
     clone.style.color = "gray";
   }
 
-  // delete elements after animation finishes
   announcement.addEventListener("animationend", () => {
     announcement.remove();
   });
