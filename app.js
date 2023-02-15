@@ -8,6 +8,8 @@ const cpuSelectionIcon = document.querySelector(".cpu-selection-icon");
 
 let userChoice;
 let computerChoice;
+let userCounter = 0;
+let cpuCounter = 0;
 
 btns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -15,6 +17,7 @@ btns.forEach((btn) => {
     computerChoice = getComputerChoice();
     moveSelectionIcons();
     decideOutcome();
+    makeLeaderGlow();
   });
 });
 
@@ -55,13 +58,15 @@ function decideOutcome() {
     case "rockscissors":
     case "paperrock":
     case "scissorspaper":
-      userScore.textContent++;
+      userCounter++;
+      userScore.textContent = userCounter;
       announceWinner("user");
       break;
     case "rockpaper":
     case "paperscissors":
     case "scissorsrock":
-      cpuScore.textContent++;
+      cpuCounter++;
+      cpuScore.textContent = cpuCounter;
       announceWinner("cpu");
       break;
     case "rockrock":
@@ -100,4 +105,17 @@ function announceWinner(winner) {
   clone.addEventListener("animationend", () => {
     clone.remove();
   });
+}
+
+function makeLeaderGlow() {
+  if (userCounter > cpuCounter) {
+    userScorecard.classList.add("glow-green");
+    cpuScorecard.classList.remove("glow-red");
+  } else if (cpuCounter > userCounter) {
+    cpuScorecard.classList.add("glow-red");
+    userScorecard.classList.remove("glow-green");
+  } else {
+    userScorecard.classList.remove("glow-green");
+    cpuScorecard.classList.remove("glow-red");
+  }
 }
